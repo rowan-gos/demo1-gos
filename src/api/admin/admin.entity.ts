@@ -10,14 +10,14 @@ export class Admin extends BaseEntity {
   @Property({ type: 'varchar', length: 255 })
   name!: string;
 
-  @Property()
+  @Property({ type: 'varchar', length: 255 })
   email!: string;
 
-  @Property()
+  @Property({ type: 'varchar', length: 255 })
   password!: string;
 
   @Property({ nullable: true })
-  avatarUrl?: string;
+  avatar_url?: string;
 
   @BeforeCreate()
   async hashPassword() {

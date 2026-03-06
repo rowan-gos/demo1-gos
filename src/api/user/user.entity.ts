@@ -6,23 +6,23 @@ const scrypt = promisify(crypto.scrypt);
 
 @Entity()
 export class User extends BaseEntity {
-  @Property()
+  @Property({ type: 'varchar', length: 255 })
   first_name!: string;
 
-  @Property()
+  @Property({ type: 'varchar', length: 255 })
   last_name!: string;
 
-  @Property()
+  @Property({ type: 'varchar', length: 255 })
   email!: string;
 
-  @Property()
+  @Property({ type: 'varchar', length: 20 })
   phone!: string;
 
-  @Property()
+  @Property({ type: 'varchar', length: 255 })
   password!: string;
 
   @Property({ nullable: true })
-  avatarUrl?: string;
+  avatar_url?: string;
 
   @BeforeCreate()
   async hashPassword() {

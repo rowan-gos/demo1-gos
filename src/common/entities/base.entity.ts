@@ -1,6 +1,7 @@
 import * as crypto from 'node:crypto';
-import { PrimaryKey, Property } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
+@Entity({ abstract: true })
 export abstract class BaseEntity {
   @PrimaryKey({ type: 'uuid', defaultRaw: 'gen_random_uuid()' })
   id: string = crypto.randomUUID();
