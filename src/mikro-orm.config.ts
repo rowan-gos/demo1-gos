@@ -1,11 +1,12 @@
+import 'dotenv/config';
 import { defineConfig } from '@mikro-orm/postgresql';
 
 export default defineConfig({
   host: process.env.DB_HOST ?? 'localhost',
-  port: Number(process.env.DB_PORT ?? '5432'),
-  user: process.env.DB_USER ?? 'postgres',
-  password: process.env.DB_PASSWORD ?? 'postgres',
-  dbName: process.env.DB_NAME ?? 'mydb',
+  port: Number(process.env.DB_PORT) || 5432,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  dbName: process.env.DB_NAME,
 
   entities: ['dist/**/*.entity.js'],
   entitiesTs: ['src/**/*.entity.ts'],
@@ -13,7 +14,12 @@ export default defineConfig({
   migrations: {
     path: 'dist/migrations',
     pathTs: 'src/migrations',
+    allOrNothing: true,
+    transactional: true,
+    safe: process.env.NODE_ENV === 'production',
+    fileName: (timestamp) => `Migration${timestamp}`,
   },
-
+  validate: process.env.NODE_ENV === 'development',
+  strict: true,
   debug: process.env.NODE_ENV !== 'production',
 });
