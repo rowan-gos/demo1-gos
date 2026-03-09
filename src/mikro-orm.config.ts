@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { defineConfig } from '@mikro-orm/postgresql';
-
+import { CustomNamingStrategy } from './common/naming-strategy';
 export default defineConfig({
   host: process.env.DB_HOST ?? 'localhost',
   port: Number(process.env.DB_PORT) || 5432,
@@ -17,8 +17,9 @@ export default defineConfig({
     allOrNothing: true,
     transactional: true,
     safe: process.env.NODE_ENV === 'production',
-    fileName: (timestamp) => `Migration${timestamp}`,
+    fileName: (timestamp) => `${timestamp}-migration.js`,
   },
+  namingStrategy: CustomNamingStrategy,
   validate: process.env.NODE_ENV === 'development',
   strict: true,
   debug: process.env.NODE_ENV !== 'production',
