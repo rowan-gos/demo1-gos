@@ -29,4 +29,11 @@ export class UserService {
   async findOne(email: string): Promise<User | undefined> {
     return Promise.resolve(this.users.find((user) => user.email === email));
   }
+  async findById(id: string): Promise<User | undefined> {
+    return Promise.resolve(this.users.find((user) => user.id === id));
+  }
+  async create(user: User): Promise<User> {
+    this.users.push(user);
+    return Promise.resolve(user);
+  }
 }
