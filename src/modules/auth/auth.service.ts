@@ -48,13 +48,13 @@ export class AuthService {
     const tokens = await this.generateTokens(user);
 
     return {
-      access_token: tokens.accessToken,
-      refresh_token: tokens.refreshToken,
+      accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken,
       user: {
         id: user.id,
         email: user.email,
-        first_name: user.first_name,
-        last_name: user.last_name,
+        firstName: user.firstName,
+        lastName: user.lastName,
       },
     };
   }
@@ -79,7 +79,7 @@ export class AuthService {
   async refresh(input: RefreshDto): Promise<RefreshResponseDto> {
     try {
       const payload = await this.jwtService.verifyAsync<{ sub: string }>(
-        input.refresh_token,
+        input.refreshToken,
         {
           secret: process.env.JWT_REFRESH_SECRET || 'default-refresh-secret',
         },
@@ -93,8 +93,8 @@ export class AuthService {
       const tokens = await this.generateTokens(user);
 
       return {
-        access_token: tokens.accessToken,
-        refresh_token: tokens.refreshToken,
+        accessToken: tokens.accessToken,
+        refreshToken: tokens.refreshToken,
       };
     } catch {
       throw new UnauthorizedException('Invalid refresh token');
@@ -113,8 +113,8 @@ export class AuthService {
     const newUser = await this.userService.create({
       id: '550e8400-e29b-41d4-a716-446655440003',
       email: input.email,
-      first_name: input.first_name,
-      last_name: input.last_name,
+      firstName: input.firstName,
+      lastName: input.lastName,
       phone: input.phone,
       password: hashedPassword,
       createdAt: new Date(),
