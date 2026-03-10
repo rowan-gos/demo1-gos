@@ -17,7 +17,7 @@ export class Admin extends BaseEntity {
   password!: string;
 
   @Property({ nullable: true })
-  avatar_url?: string;
+  avatarUrl?: string;
 
   @BeforeCreate()
   async hashPassword() {

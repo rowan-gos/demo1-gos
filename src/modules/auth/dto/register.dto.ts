@@ -14,12 +14,12 @@ export class RegisterDto {
   @IsString()
   @MinLength(2)
   @MaxLength(255)
-  first_name: string;
+  firstName: string;
 
   @IsString()
   @MinLength(2)
   @MaxLength(255)
-  last_name: string;
+  lastName: string;
 
   @IsVietnamesePhone()
   phone: string;
