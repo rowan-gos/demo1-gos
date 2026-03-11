@@ -2,9 +2,10 @@ import { BeforeCreate, Entity, Property } from '@mikro-orm/core';
 import { promisify } from 'node:util';
 import * as crypto from 'node:crypto';
 import { BaseEntity } from '@/common/entities/base.entity';
+import { UserRepository } from './user.repository';
 const scrypt = promisify(crypto.scrypt);
 
-@Entity()
+@Entity({ repository: () => UserRepository })
 export class User extends BaseEntity {
   @Property({ type: 'varchar', length: 255 })
   firstName!: string;
