@@ -1,7 +1,8 @@
-import { BeforeCreate, Entity, Property } from '@mikro-orm/core';
+import { BeforeCreate, Entity, Enum, Property } from '@mikro-orm/core';
 import { promisify } from 'node:util';
 import * as crypto from 'node:crypto';
 import { BaseEntity } from '@/common/entities/base.entity';
+import { Role } from '@/common/enums/role.enum';
 const scrypt = promisify(crypto.scrypt);
 
 @Entity()
@@ -23,6 +24,9 @@ export class User extends BaseEntity {
 
   @Property({ nullable: true })
   avatarUrl?: string;
+
+  @Enum(() => Role)
+  role: Role = Role.USER;
 
   @BeforeCreate()
   async hashPassword() {
