@@ -1,10 +1,17 @@
-import { IsEmail } from 'class-validator';
-import { IsStrongPassword } from '../../../common/validators';
+import { IsValidEmail, IsValidText } from '@/common/custom-validation';
 
 export class LoginDto {
-  @IsEmail()
+  @IsValidEmail({
+    required: true,
+    message: 'Email is invalid',
+  })
   email: string;
 
-  @IsStrongPassword()
+  @IsValidText({
+    minLength: 8,
+    maxLength: 255,
+    required: true,
+    message: 'Password is required',
+  })
   password: string;
 }
