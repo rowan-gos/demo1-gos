@@ -5,6 +5,7 @@ import { BaseEntity } from '@/common/entities/base.entity';
 import { Role } from '@/common/enums/role.enum';
 import { UserRepository } from './user.repository';
 import { Role } from '@/common/enums/role.enum';
+import { UserRepository } from './user.repository';
 const scrypt = promisify(crypto.scrypt);
 
 @Entity({ repository: () => UserRepository })
