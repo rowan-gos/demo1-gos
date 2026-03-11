@@ -5,8 +5,6 @@ import { UserService } from '../../user/user.service';
 
 interface JwtPayload {
   sub: string;
-  email: string;
-  role: string;
 }
 
 @Injectable()
@@ -24,6 +22,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-    return user; // Injected as req.user in protected routes
+    return user;
   }
 }
